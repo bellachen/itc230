@@ -1,0 +1,13 @@
+"name": "website",
+"version": "1.0",
+"license": "MIT",
+"description": "Week 1 assignment",
+"main": "index.js",
+"repository": {
+    "type": "git",
+    "url": "https://github.com/bellachen/itc230.git"
+ },
+ "scripts": {
+    "build": "node app.js",
+    "test": "standard"
+}
