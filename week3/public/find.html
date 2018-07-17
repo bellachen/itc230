@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        text-align: center;
+    }
+</style>    
+<body>
+<h1>Found</h1>
+{{#if search}}
+    <h2>{{name}}</h2>
+    <li>Price: {{search.price}}</li>
+    <li>Brand: {{search.brand}}</li>
+    <p>
+    <a href="/delete?name={{search.name}}">Delete</a>
+    </p>
+{{/if}}
+</body>
+</html>
