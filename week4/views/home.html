@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        text-align: center;
+    }
+</style>    
+<body>
+<h1>Homepage</h1>
+
+<form method="post" action="/detail">
+    <div>
+        Search: <input name="search" placeholder="Search" type="text" />
+        <button>Search</button>
+    </div>
+</form>
+
+<h2>Available Snacks</h2>
+{{#each snacks}}
+    <li><a href="/detail?name={{name}}">{{name}}</a></li>
+{{/each}}
+
+</body>
+</html>
