@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        text-align: center;
+    }
+</style>    
+<body>
+<h1>Homepage</h1>
+<p>This is the homepage.</p>
+<form method="post" action="/find">
+    <div>
+        Search: <input name="search" placeholder="Search" type="text" />
+        <button>Search</button>
+    </div>
+</form>
+
+<h1>Snacks Menu</h1>
+{{#each snacks}}
+    <li><a href="/find?name={{name}}">{{name}}</a></li>
+{{/each}}
+</body>
+</html>

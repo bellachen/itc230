@@ -6,18 +6,10 @@
     }
 </style>    
 <body>
-<h1>Homepage</h1>
-<p>This is the homepage.</p>
-<form method="post" action="/find">
-    <div>
-        Search: <input name="search" placeholder="Search" type="text" />
-        <button>Search</button>
-    </div>
+<h2>Home</h2>
+<form method="POST" action="/get">
+    <input type="text" name="title" placeholder="name" required maxlength="100">
+    <button>Search</button>
 </form>
-
-<h1>Snacks Menu</h1>
-{{#foreach snacks}}
-    <li><a href="/find?name={{name}}">{{name}}</a></li>
-{{/foreach}}
 </body>
 </html>

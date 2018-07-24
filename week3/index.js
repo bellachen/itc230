@@ -13,8 +13,9 @@ app.set('view engine', 'handlebars');
 
 // home
 app.get('/', (req, res) => {
- res.type('text/html');
- res.sendFile(__dirname + '/public/home.html'); 
+    res.render('home', {
+        snacks: snacks.getAll()
+    }); 
 });
 
 // from home POST to find
@@ -22,15 +23,16 @@ app.post('/find', function(req,res){
     console.log(req.body)
     var search = snacks.get(req.body.name);
     res.render("find", {
-        snacks: snacks.getAll()
+        name: req.body.name, result: search, snacks: snacks.getAll()
     });
 });
 
 // find
-app.post('/find', function(req,res){
+app.get('/find', function(req,res){
     console.log(req.query)
     var search = snacks.get(req.query.name);
     res.send('find', {
+        name: req.query.name, 
         result: search
         });
 });
@@ -39,14 +41,15 @@ app.post('/find', function(req,res){
 app.get('/delete', function(req,res){
     var search = snacks.delete(req.query.name);
     res.render('delete', {
-        result: search 
+        name: req.query.snack, 
+        result: search
     });
 });
 
 // about
 app.get('/about', (req, res) => {
  res.type('text/plain');
- res.sendFile(__dirname + '/public/about.html');
+ res.sendFile(__dirname + '/views/about.html');
 });
 
 // 404 
