@@ -34,10 +34,9 @@ http.createServer(function (req, res) {
       });
       break;
     case '/find':
-      //var found = JSON.stringify(snacks.get(search.name)); //NOT WORKING: call get function, and pass searched name
+      var found = JSON.stringify(snacks.get(search.name)); //NOT WORKING: call get function, and pass searched name
         res.writeHead(200, {'Content-Type': 'text/html'});
-        //res.write("Match: " + found); //NOT WORKING: display result from get function
-        res.write("Match: " + search.name);
+        res.write("Match: " + found);
         res.end();
       break;  
     case '/delete':

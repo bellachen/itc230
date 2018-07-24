@@ -11,14 +11,15 @@ exports.getAll = function () {
 };
 
 exports.get = function(name) {
-    //var result = snacks.find(snack.name === name){ //NOT WORKING: use find method to look for searched name in array
-    //  return result;
-    //}
+    return snacks.find(function(snack) {
+        return snack.name.toLowerCase() === name;
+        });
 };
 
 exports.delete = function(name) {
-   //var result = snacks.find(snack.name === name){ //NOT WORKING: Find searched name in array
-   //     var position = snacks[result]; //NOT WORKING: Locate position its in 
-   //     snacks.splice(0,position); //NOT WORKING: Remove from array
-   //}
+    var exist = this.get(snack.name.toLowerCase() === name);
+    if(exist) {
+        // var position = snacks[result]; //Locate position
+        // snacks.splice(0,position); //Remove from array
+    }
 };
