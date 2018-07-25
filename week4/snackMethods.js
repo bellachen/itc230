@@ -20,3 +20,11 @@ exports.get = (name) => {
         return item.name.toLowerCase() === name.toLowerCase();
     });
 };
+
+//delete selected snack
+exports.delete = (name) => {
+    snacks = snacks.filter((item) => {  // create new array with all elements that pass the test
+        return item.name !== name;
+    });
+    return {snacks}; // return what was deleted
+};
