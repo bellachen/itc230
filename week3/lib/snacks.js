@@ -10,15 +10,16 @@ exports.getAll = function () {
     return snacks;
 };
 
-exports.get = function(name) {
-    return snacks.find(function(item) {
+exports.get = (name) => {
+    return snacks.find((item) => {
         return item.name.toLowerCase() === name.toLowerCase();
-        });
+    });
 };
 
-exports.delete = function(name) {
-    var position = snacks.findIndex(name);
-    if(position != -1) {
-        snacks.splice(0,position);
-    }
+exports.delete = (name) => {
+    var list = snacks.length;
+    snacks = snacks.filter((item) => {  // create new array with all elements that pass the test
+        return item.name !== name;
+    });
+    return {snacks}; // return what was deleted
 };

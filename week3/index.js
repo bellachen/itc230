@@ -23,10 +23,11 @@ app.get('/', (req, res) => {
 app.post('/find', function(req,res){
     console.log(req.body)
     var search = snacks.get(req.body.name);
-     console.log(search);
+    console.log(search);
     res.render("find", {
         name: req.body.name, 
-        result: search
+        search: search,
+        snacks: snack.getAll()
     });
 });
 
