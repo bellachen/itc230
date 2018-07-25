@@ -11,20 +11,28 @@ exports.getAll = () => {
 };
 
 exports.get = (name) => {
-    snacks = snacks.find((item) => {
-        return item.name.toLowerCase() === name;
+    return snacks.find((item) => {
+        return item.name.toLowerCase() === name.toLowerCase();
     });
 };
 
 exports.delete = (name) => {
-    var result = snacks.find(item, index);
-    if (item.name.toLowerCase() == name ) {
-        snacks.splice(index, 1);
-        return true; 
-    }else{
-        return result != false;  
-    }
+    var list = snacks.length;
+    snacks = snacks.filter((item) => {  // create new array with all elements that pass the test
+        return item.name !== name;
+    });
+    return {snacks}; // return what was deleted
 };
+
+//exports.delete = (name) => {
+//    var result = snacks.find(item, index);
+//    if (item.name.toLowerCase() == name ) {
+//        snacks.splice(index, 1);
+//        return true; 
+//    }else{
+//        return result != false;  
+//    }
+// };
 
 //exports.delete = function(name) {
 //    var exist = this.get(snack.name.toLowerCase() === name);
@@ -33,3 +41,4 @@ exports.delete = (name) => {
 //        snacks.splice(0,position); //Remove from array
 //    }
 //};
+

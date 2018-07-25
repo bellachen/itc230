@@ -36,13 +36,13 @@ http.createServer(function (req, res) {
     case '/get':
       var found = snack.get(search.name); 
         res.writeHead(200, {'Content-Type': 'text/html'});
-        let results = JSON.stringify(found);
-        res.end('Results for ' + search.name + "\n" + results);
+        var results = (found) ? JSON.stringify(found) : "Not found";
+        res.end('Results for ' + search.name + "=" + results);
       break;
     case '/delete':
         res.writeHead(200, {'Content-Type': 'text/html'});
-        //res.write("Deleted: " + snacks.delete(query.name));
-        res.end('delete');
+        var results = snack.delete(search.name); 
+        res.end('Deleted snack' + results);
       break;
   }
 }).listen(process.env.PORT || 3000);
