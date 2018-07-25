@@ -8,8 +8,9 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public')); 
 app.use(require("body-parser").urlencoded({extended: true})); 
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+app.engine(".html", exphbs({extname: '.html'}));
+app.set("view engine", ".html");
+
 
 // home
 app.get('/', (req, res) => {
@@ -22,8 +23,10 @@ app.get('/', (req, res) => {
 app.post('/find', function(req,res){
     console.log(req.body)
     var search = snacks.get(req.body.name);
+     console.log(search);
     res.render("find", {
-        name: req.body.name, result: search, snacks: snacks.getAll()
+        name: req.body.name, 
+        result: search
     });
 });
 
@@ -31,9 +34,10 @@ app.post('/find', function(req,res){
 app.get('/find', function(req,res){
     console.log(req.query)
     var search = snacks.get(req.query.name);
-    res.send('find', {
+    console.log(search);
+    res.render('find', {
         name: req.query.name, 
-        result: search
+        search: search
         });
 });
 

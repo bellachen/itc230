@@ -11,15 +11,14 @@ exports.getAll = function () {
 };
 
 exports.get = function(name) {
-    return snacks.find(function(snack) {
-        return snack.name.toLowerCase() === name;
+    return snacks.find(function(item) {
+        return item.name.toLowerCase() === name.toLowerCase();
         });
 };
 
 exports.delete = function(name) {
-    var exist = this.get(snack.name.toLowerCase() === name);
-    if(exist) {
-        // var position = snacks[result]; //Locate position
-        // snacks.splice(0,position); //Remove from array
+    var position = snacks.findIndex(name);
+    if(position != -1) {
+        snacks.splice(0,position);
     }
 };

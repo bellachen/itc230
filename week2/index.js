@@ -33,17 +33,16 @@ http.createServer(function (req, res) {
          return res.end();
       });
       break;
-    case '/find':
-      var found = JSON.stringify(snacks.get(search.name)); //NOT WORKING: call get function, and pass searched name
+    case '/get':
+      var found = snack.get(search.name); 
         res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write("Match: " + found);
-        res.end();
-      break;  
+        let results = JSON.stringify(found);
+        res.end('Results for ' + search.name + "\n" + results);
+      break;
     case '/delete':
         res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write("Delete in array: " + snacks.delete());
-        //res.write("Deleted: " + snacks.delete(search.name));
-        res.end();
+        //res.write("Deleted: " + snacks.delete(query.name));
+        res.end('delete');
       break;
   }
 }).listen(process.env.PORT || 3000);

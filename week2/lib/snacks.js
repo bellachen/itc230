@@ -6,20 +6,30 @@ var snacks = [
  { name:'Donut', price:1, brand:'Mighty Os' }
 ];
 
-exports.getAll = function () {
+exports.getAll = () => {
     return snacks;
 };
 
-exports.get = function(name) {
-    return snacks.find(function(snack) {
-        return snack.name.toLowerCase() === name;
-        });
+exports.get = (name) => {
+    snacks = snacks.find((item) => {
+        return item.name.toLowerCase() === name;
+    });
 };
 
-exports.delete = function(name) {
-    var exist = this.get(snack.name.toLowerCase() === name);
-    if(exist) {
-        // var position = snacks[result]; //Locate position
-        // snacks.splice(0,position); //Remove from array
+exports.delete = (name) => {
+    var result = snacks.find(item, index);
+    if (item.name.toLowerCase() == name ) {
+        snacks.splice(index, 1);
+        return true; 
+    }else{
+        return result != false;  
     }
 };
+
+//exports.delete = function(name) {
+//    var exist = this.get(snack.name.toLowerCase() === name);
+//    if(exist) {
+//        var position = snacks[result]; //Locate position
+//        snacks.splice(0,position); //Remove from array
+//    }
+//};
