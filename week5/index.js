@@ -30,7 +30,7 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    res.json({ message: 'Welcome to our api!' });   
 });
 
 // =============================================================================
@@ -76,7 +76,7 @@ router.route('/snacks/:name')
         });
     });
     
-    // delete the snack with this id (accessed at DELETE http://localhost:8080/api/bears/:name)
+    // delete the snack with this id (accessed at DELETE http://localhost:8080/api/snacks/:name)
     .delete(function(req, res) {
         Snack.remove({
             _id: req.params.name
@@ -97,4 +97,4 @@ app.use('/api', router);
 // START THE SERVER
 // =============================================================================
 app.listen(port);
-console.log('Magic happens on port ' + port);
+console.log('Started ' + port);
