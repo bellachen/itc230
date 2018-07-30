@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body {
+        text-align: center;
+    }
+</style>    
+<body>
+<h1>Detail Page</h1>
+
+{{#if result}}
+    <li>Name: {{result.name}}</li>
+    <li>Price: {{result.price}}</li>
+    <li>Brand: {{result.brand}}</li>
+{{else}}
+        <h2>{{name}} not found</h2>
+{{/if}}
+
+</body>
+</html>
