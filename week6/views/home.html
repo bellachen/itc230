@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <style>
+    body {
+        text-align: center;
+    }
+</style> 
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+      //loop through list of available snacks    
+      var SnackList = ({items}) => {
+        var Menu = items.map((item) => {
+          
+            //display snack name
+            return <li id={item._id} key={item._id} onClick={show}>{item.name}</li>
+            
+            //click button for details
+            <button onClick={this._showMessage.bind(null, true)}>Details</button>
+            
+            //display details
+            { this.state.showMessage && <div>{item.price}{item.brand}</div> }
+        });
+        return <ul>{Menu}</ul>;
+      }
+      
+      //Snacksapp
+      class Snacksapp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            items:{{{snacks}}}, 
+            showMessage: false
+          };
+        }
+        
+        _showMessage = (bool) => {
+          this.setState({
+            showMessage: bool
+          });
+        }
+        
+        render() {
+          return (
+            <div>
+              <h1>Snacks Menu</h1>
+              <h2>There are {this.state.items.length} snacks</h2>
+              <SnackList items={this.state.items}/>
+            </div>
+          );
+        }
+      }
+        
+      ReactDOM.render(
+        <Snacksapp />,
+        document.getElementById('root')
+      );  
+        
+              /* TEST    
+              //format output of snacks
+              function ListItem(props) {
+                return <h1>{props.snack.name} {props.snack.price} {props.snack.brand}</h1>;
+              }
+              //LOOP
+              render() {
+                return (
+                  <div>
+                    <h1>Hello, world!</h1>
+                    <ListItem snack={this.state.items[0]} />
+                    <h2>There are {this.state.items.length} snacks</h2>
+                    for (var i = 0; i < {this.state.items.length}; i++) {
+                      <ListItem snack={this.state.items[i]} />
+                    }  
+                  </div>
+                );
+              }
+              //MAP
+              render() {
+                return (
+                  <div>
+                    <h1>Hello, world!</h1>
+                    <h2>There are {this.state.items.length} snacks</h2>
+                    <ListItem snack={this.state.items[0]} />
+                    <ul>
+                      {this.state.items.map(function(item, i){
+                         return <li key={i}>{item.name}</li>
+                       )}
+                    </ul>
+                  </div>
+                );
+              }
+              */
+
+    </script>
+  </body>
+</html>
+   
+
