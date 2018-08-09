@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <style>
+    body {
+        text-align: center;
+    }
+    li {
+      list-style-type: none;
+    }
+</style> 
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+      //loop through list of available snacks    
+      var SnackList = ({items, showDetail}) => {
+        var Menu = items.map((item) => {
+            //display snack name
+            return <li onClick={showDetail} id={item._id} key={item._id}>{item.name}</li>
+        });
+        return <ul>{Menu}</ul>;
+      }
+      
+      //Details displayed here
+      var Detail = (props) => {
+        return 
+          /*<div>
+            {props.item.name}<br/>
+            {props.item.price}<br/>
+            {props.item.brand}
+          </div>*/
+          <div>
+            <h3>Snacks:</h3>
+            <form>
+              <input type="text" name="name" value={props.item.name || ""} />
+              <input type="value" name="price" value={props.item.price || ""} />
+              <input type="text" name="brand" value={props.item.brand || ""} />
+            </form>
+            <button onClick={props.save}>Save</button>
+            <button onClick={props.clear}>Clear</button> 
+            <button onClick={props.remove}>Delete</button>
+          </div>;
+      }
+      
+      //Snacksapp
+      class Snacksapp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            items:{{{snacks}}}, 
+            currentItem:{},
+          };
+          this.showDetail = this.showDetail.bind(this);
+          this.saveDetail = this.saveDetail.bind(this);
+          this.deleteDetail = this.deletDetail.bind(this);
+          this.clearDetail = this.clearDetail.bind(this);
+        }
+        
+        //capture click and set click as the current item
+        showDetail(event) {
+          console.log(event.target.id)
+          var selectItem = this.state.items.find((item) => {
+            return item._id == event.target.id;
+          });
+          this.setState({currentItem: selectItem});
+        }
+      
+        //edit & save
+        saveDetail() {
+          var changeItem = this.state.currentItem;
+          changeItem[event.target.name] = event.target.value;
+          //this.setState({currentItem: changeItem});
+          fetch("/api/save/", {
+            method: "POST",
+          	headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(changeItem)
+          }).then(res => res.json())
+          	.then((json) => {
+              changeItem = this.state.items.map((item) => {
+                if (item._id === changeItem._id) {
+                  item = changeItem; 
+                }
+                return item;
+              });     
+                //.catch((err) => {
+                    // handle error
+                //});
+            }
+        }
+        
+        //delete 
+        deleteDetail() {
+          var id = this.state.currentItem._id;
+          fetch("/api/delete/" + id).then((response) => {
+            return response.json();
+          }).then(res => res.json())
+            .then((result) => {
+              var newSnackList = this.state.items.filter((item) => {
+                return item._id !== id;
+              });
+              //update array
+              this.setState({items: newSnackList, currentItem: {}});
+            });
+              //.catch((err) => {
+                // handle error
+              //});
+        
+        //clear
+        clearDetail() {
+          this.setState({currentItem: {}});
+        }
+        
+        render() {
+          return (
+            <div>
+              <h1>Snacks Menu</h1>
+              <h2>There are {this.state.items.length} snacks</h2>
+              <SnackList items={this.state.items} showDetail={this.showDetail}/>
+              <Detail item={this.state.currentItem} save={this.saveDetail} clear={this.clearDetail} remove={this.deleteDetail}/>
+            </div>
+          );
+        }
+      }
+        
+      ReactDOM.render(
+        <Snacksapp />,
+        document.getElementById('root')
+      );  
+
+    </script>
+  </body>
+</html>
+   
+
