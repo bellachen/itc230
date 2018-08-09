@@ -10,6 +10,9 @@
     body {
         text-align: center;
     }
+    li {
+      list-style-type: none;
+    }
 </style> 
   </head>
   <body>
@@ -17,19 +20,21 @@
     <script type="text/babel">
     
       //loop through list of available snacks    
-      var SnackList = ({items}) => {
+      var SnackList = ({items, showDetail}) => {
         var Menu = items.map((item) => {
-          
             //display snack name
-            return <li id={item._id} key={item._id}>{item.name}</li>
-            
-            //click button for details
-            <button onClick={this._showMessage.bind(null, true)}>Details</button>
-            
-            //display details
-            { this.state.showMessage && <div>{item.price}{item.brand}</div> }
+            return <li onClick={showDetail} id={item._id} key={item._id}>{item.name}</li>
         });
         return <ul>{Menu}</ul>;
+      }
+      
+      //detail of current item displayed here
+      var Detail = (props) => {
+        return <div>
+          {props.item.name}<br/>
+          {props.item.price}<br/>
+          {props.item.brand}
+        </div>;
       }
       
       //Snacksapp
@@ -38,14 +43,18 @@
           super(props);
           this.state = {
             items:{{{snacks}}}, 
-            showMessage: false
+            currentItem:{},
           };
+          this.showDetail = this.showDetail.bind(this);
         }
         
-        _showMessage = (bool) => {
-          this.setState({
-            showMessage: bool
+        //capture click and set click as the current item
+        showDetail(event) {
+          console.log(event.target.id)
+          var selectItem = this.state.items.find((item) => {
+            return item._id == event.target.id;
           });
+          this.setState({currentItem: selectItem});
         }
         
         render() {
@@ -53,7 +62,8 @@
             <div>
               <h1>Snacks Menu</h1>
               <h2>There are {this.state.items.length} snacks</h2>
-              <SnackList items={this.state.items}/>
+              <SnackList items={this.state.items} showDetail={this.showDetail}/>
+              <Detail item={this.state.currentItem}/>
             </div>
           );
         }
