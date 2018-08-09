@@ -20,15 +20,7 @@ app.get('/', (req, res, next) => {
   });
 });
 
-app.get('/api/snacks/:name', (req, res, next) => {
-  Snack.findOne({name:req.params.name}, (err, snack) => {
-    if (err) return next(err);
-    console.log(snack);
-    res.json(snack);
-  });
-});
-
-app.get('/save', (req, res, next) => {
+app.get('/api/save', (req, res, next) => {
   Snack.updateOne({_id: req.body._id}, {name:req.body.name, price: req.body.price, brand: req.body.brand }, (err, result) => {
     if (err) return next(err);
     console.log(result);
@@ -36,11 +28,19 @@ app.get('/save', (req, res, next) => {
   });
 });
 
-app.get('/delete', (req, res, next) => {
+app.get('/api/delete/:id', (req, res, next) => {
   Snack.remove({name:req.query.name}, (err, snack) => {
     if (err) return next(err);
     console.log(snack);
     res.render({result: snack }); 
+  });
+});
+
+app.get('/api/snacks/:name', (req, res, next) => {
+  Snack.findOne({name:req.params.name}, (err, snack) => {
+    if (err) return next(err);
+    console.log(snack);
+    res.json(snack);
   });
 });
 
