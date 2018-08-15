@@ -20,19 +20,10 @@ app.get('/', (req, res, next) => {
   });
 });
 
-app.get('/api/save', (req, res, next) => {
-  Snack.updateOne({_id: req.body._id}, {name:req.body.name, price: req.body.price, brand: req.body.brand }, (err, result) => {
+app.get('/api/snacks', (req, res, next) => {
+  Snack.find({}, function (err, items) {
     if (err) return next(err);
-    console.log(result);
-    res.json({result: result }); 
-  });
-});
-
-app.get('/api/delete/:id', (req, res, next) => {
-  Snack.remove({name:req.query.name}, (err, snack) => {
-    if (err) return next(err);
-    console.log(snack);
-    res.render({result: snack }); 
+    res.json(items); 
   });
 });
 
@@ -44,10 +35,19 @@ app.get('/api/snacks/:name', (req, res, next) => {
   });
 });
 
-app.get('/api/snacks', (req, res, next) => {
-  Snack.find({}, function (err, items) {
+app.get('/api/save', (req, res, next) => {
+  Snack.updateOne({_id: req.body._id}, {name:req.body.name, price: req.body.price, brand: req.body.brand }, (err, result) => {
     if (err) return next(err);
-    res.json(items); 
+    console.log(result);
+    res.json({result: item }); 
+  });
+});
+
+app.get('/api/delete/:id', (req, res, next) => {
+  Snack.remove({name:req.query.name}, (err, snack) => {
+    if (err) return next(err);
+    console.log(snack);
+    res.render({result: snack }); 
   });
 });
 
