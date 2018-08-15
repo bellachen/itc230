@@ -47,7 +47,7 @@ app.get('/api/delete/:id', (req, res, next) => {
   Snack.remove({name:req.query.name}, (err, snack) => {
     if (err) return next(err);
     console.log(snack);
-    res.render({result: snack }); 
+    res.render({result: item }); 
   });
 });
 
