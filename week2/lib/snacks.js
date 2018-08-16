@@ -16,8 +16,16 @@ exports.get = (name) => {
     });
 };
 
-exports.delete = (name) => {
+/*exports.delete = (name) => {
     var list = snacks.length;
+    snacks = snacks.filter((item) => {  
+        return item.name !== name;
+    });
+    return {snacks}; // return what was deleted
+};*/
+
+//use filter to delete
+exports.delete = (name) => {
     snacks = snacks.filter((item) => {  // create new array with all elements that pass the test
         return item.name !== name;
     });
