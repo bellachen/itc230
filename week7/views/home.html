@@ -73,7 +73,7 @@
         }
       
         //edit & save
-        saveDetail() {
+        saveDetail(event.target.name) {
           var changeItem = this.state.currentItem;
           changeItem[event.target.name] = event.target.value;
           //this.setState({currentItem: changeItem});
